@@ -16,7 +16,7 @@ Backend: **Node.js + Express + MySQL**. Frontend: **Vite SPA** (HTML + JS).
 │  ├─ data.csv           # the file CSV
 │  ├─ readcsv.js         # CSV loader
 └─ frontend/             # SPA with Vite (HTML + vanilla JS)
-   ├─ index.html         # Layout & navbar
+   ├─ index.html         # Layout 
    ├─ index.js           # Simple SPA router
    ├─ public/            # Views
    └─ js/                # View/CRUD logic
