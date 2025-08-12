@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise';
 import 'dotenv/config';
 
+// Coneccion a la DB exportada a los CRUD
 export const connection = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,

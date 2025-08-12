@@ -25,6 +25,7 @@ async function main() {
 
   for (const row of rows) {
     try {
+      // Primero realiza la lectura de usuario para asi tener el ID de este
       const idUsuario = await getOrCreateUsuarioAsync(row["Nombre del ciente"], row["Número de Identificación"], row["Dirección"], row["Teléfono"], row["Correo Electrónico"]);
       const idTransacion  = await getOrCreateMedicoAsync(idUsuario, row);
       await insertFactura(idPaciente, idMedico, row);
@@ -43,8 +44,7 @@ main().catch(err => {
   console.error("Fallo general:", err);
 });
 
-// -------- helpers (sin modificar tus rows; email sí se normaliza aquí) --------
-
+// 
 function getOrCreateUsuario(nombre, idenficacion, direccion, telefono, email, callback) {
   const emailNorm = email.toString().trim().toLowerCase();
   const idenficacionNorm = idenficacion.trim()
