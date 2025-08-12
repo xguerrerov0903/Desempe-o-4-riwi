@@ -26,8 +26,11 @@ async function main() {
 
   for (const row of rows) {
     try {
+      // Primero realiza la lectura de usuario para asi tener el ID de este
       const idUsuario = await getOrCreateUsuarioAsync(row["Nombre del Cliente"], row["Número de Identificación"], row["Dirección"], row["Teléfono"], row["Correo Electrónico"]);
+      // Sigue con la de transacion entregandole el ID de usuario para su FK
       const idTransacion  = await getOrCreateTransacionAsync(idUsuario, row["ID de la Transacción"],row["Fecha y Hora de la Transacción"], row["Monto de la Transacción"], row["Estado de la Transacción"], row["Tipo de Transacción"]);
+      // Finalmente se crea la factura que tiene como FK el ID de usuario y transaccion
       await insertFactura(idUsuario, idTransacion, row);
 
       console.log(`Factura insertada para usuario ${idUsuario} y transaccion ${idTransacion}`);
@@ -45,7 +48,7 @@ main().catch(err => {
  });
 
 
-
+// Insercion del los datos a la tabla usuarios revisando que email e identificacion no sean repetidos para respetar el unique, de repetirse alguno se regresa la id de la repeticion
 function getOrCreateUsuario(nombre, idenficacion, direccion, telefono, email, callback) {
   const emailNorm = email.toString().trim().toLowerCase();
   const idenficacionNorm = idenficacion.trim()
@@ -73,6 +76,7 @@ function getOrCreateUsuario(nombre, idenficacion, direccion, telefono, email, ca
   );
 }
 
+// Se revisa que no se repita el codigo de transanccion de serlo se regresa el id de esa transaccion si no se crea el nuevo
 function getOrCreateTransacion(idUsuario, codigo_transaccion, fecha, cantidad, estado, tipo, callback) {
   connection.query(
     "SELECT id_transaccion FROM transacciones WHERE codigo_transaccion = ?",

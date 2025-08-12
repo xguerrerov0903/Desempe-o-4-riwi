@@ -17,7 +17,7 @@ import {
 
 const app = express();
 
-// Si usas Vite en 5173:
+// 
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
@@ -27,6 +27,7 @@ app.get('/', (_req, res) => res.send('API OK 👋'));
 const PORT = 3000;
 app.listen(PORT, () => console.log(`API corriendo en http://localhost:${PORT}`));
 
+// Importancion de las funciones CRUD y de consulta para la consultas de front
 app.get('/facturas', listFacturas);
 app.get('/facturas/:id', getFactura);
 app.post('/facturas', createFactura);

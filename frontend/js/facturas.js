@@ -36,6 +36,7 @@ function printFacturas(facturas) {
     .join("");
 }
 
+// Reimprime la fila 
 function rePrintfacturaView(c, tr) {
   tr.innerHTML = `
     <tr id="${c.id_factura}">
@@ -55,27 +56,29 @@ function rePrintfacturaView(c, tr) {
   `;
 }
 
-// Hear the event submit (button) of the form
+// Escucha cualquiera de los botones de acciones
 function setupfacturasTableListener() {
   const tbody = document.getElementById("facturasTableBody");
 
-  // Avoid multiple listeners: clone the node and replace it (removes listeners)
   const newTbody = tbody.cloneNode(true);
   tbody.parentNode.replaceChild(newTbody, tbody);
 
   newTbody.addEventListener("click", async function (event) {
     event.preventDefault();
-    // Check if the clicked element is a button
+    // Revisa que el click corresponda a un boton
     if (event.target.tagName !== "BUTTON") return;
+    // Se agarra el id de la fila el cual fua asignado cuando se renderizo
     const tr = event.target.closest("tr");
     const id = tr.id;
     const action = event.target.value;
-    // Check if the action is delete
+    // Revisa si hacemos un delet y ejecuta de ser asi a la fila correspondiente
     if (action === "delete") {
       await deletes(url, id);
       tr.remove();
+      // Si es un edit se va a su propia funcion que se encarga de renderizar la edicion
     } else if (action === "edit") {
       editFactura(id);
+      // Cuando se lea el save se realiza su update(patch) con los inputs leidos
     } else if (action === "save-factura") {
       const id = tr.id;
 
@@ -95,17 +98,16 @@ function setupfacturasTableListener() {
         id_transaccion: inputs[4].value,
       };
 
-      // Update factura in DB
       await update(url, id, updatedfactura);
       rePrintfacturaView(updatedfactura, tr);
     } else {
-      // This case es cancel so dont edit the event
+      // Por default seria cancelar y no se hace nada solo reimprimir la fila original
       const original = await get_id(url, id);
       rePrintfacturaView(original, tr);
     }
   });
 }
-
+// Se imprime una version de la fila con inputs para su edicion
 async function editFactura(id) {
   const facturaContainer = document.getElementById(id);
   const factura = await get_id(url, id);
@@ -130,6 +132,7 @@ async function editFactura(id) {
     `;
 }
 
+// Una funcion helper que leera la elecion de inputs option
 function selectOpt(val, current) {
   const sel = val === current ? " selected" : "";
   return `<option value="${val}"${sel}>${val}</option>`;

@@ -1,4 +1,4 @@
-
+// CRUD del fronend, se comunican en url con JSON hacia el back, la api (llamada app.js en backend) se encarga de entender esta solicitudes
 export async function get(url) {
   try {
     const response = await fetch(url);

@@ -1,14 +1,14 @@
-// Main script to handle SPA routing and logic.
 
-// Define the routes for the application
+// Rutas para la aplicacion
 const routes = {
   "/": "/facturas.html",
   "/facturas": "/facturas.html",
   "/create/create_factura": "/create/create_factura.html",
 };
 
+// Ruta defautl para evitar el ingreso a URL no existentes
+
 const DEFAULT_PATH = "/facturas";
-// Function to handle navigation and load the appropriate content
 document.body.addEventListener("click", (e) => {
   if (e.target.matches("[data-link]")) {
     e.preventDefault();
@@ -20,6 +20,7 @@ document.body.addEventListener("click", (e) => {
 
 async function navigate(pathname) {
 
+    // Si el path no se conincide con alguno de los de routes lo mandara al default
   if (!routes[pathname]) {
     pathname = DEFAULT_PATH;
   }

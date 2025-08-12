@@ -1,5 +1,6 @@
 import { connection } from "../db.js";
 
+// Funciones de consulta
 export async function totalCliente(_req, res) {
   const [rows] = await connection.execute(
     `SELECT u.nombre, SUM(f.monto_pagado)

@@ -2,18 +2,19 @@ import { post, get } from "../crud.js";
 
 const url = "http://localhost:3000/facturas";
 
-// Event listener for the new event form submission
+// Estare a la escucha del boton de submit
 
 document
   .getElementById("newFacturaForm")
   .addEventListener("submit", async function (event) {
-    // Prevent the default form submission behavior
+    // Evita la recarga de la pagina ya que es SPA
     event.preventDefault();
 
     // Create a FormData object from the form
     const formData = new FormData(this);
     const factura = Object.fromEntries(formData.entries());
 
+    // Se revisa que el codigo de factura ingresado no se repita
     const todos = await get(url);
     const existe =
       Array.isArray(todos) &&
@@ -23,12 +24,13 @@ document
       );
 
     if (existe) {
+        // De repetirse saltara un alert
       alert(`El codigo "${factura.codigo_factura}" ya está registrado en otra factura.`);
       return;
     }
 
 
-    // Post the new event data to the server
+    // Si no hay interrupciones se creare al nuevo registro de factura
     try {
       await post(url, factura);
       alert("Cita agregada exitosamente");
@@ -38,3 +40,4 @@ document
     }
   });
 
+// No hay revision de que el id de usuario y transaccion sean correctas ya que no contamos con los elementos CRUD de estos, por cuestiones de tiempo se deja asi pero se puede implementar a futuro con mas tiempo

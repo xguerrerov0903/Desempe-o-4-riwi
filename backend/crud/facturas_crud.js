@@ -1,3 +1,5 @@
+// Funciones CRUD para facturas, una traduccion para SQL
+
 import { connection } from '../db.js';
 
 export async function listFacturas(_req, res) {
@@ -59,7 +61,6 @@ export async function deleteFactura(req, res) {
     return res.status(404).json({ error: 'No existe' });
   }
 
-  // Si se borró correctamente:
-  return res.sendStatus(204); // "No Content"
+  return res.sendStatus(204); 
 }
 

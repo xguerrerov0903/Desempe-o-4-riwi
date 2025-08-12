@@ -3,6 +3,7 @@ import fs from 'fs';
 import csv from 'csv-parser';
 import { parse } from 'csv-parse/sync';
 
+
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -27,6 +28,7 @@ async function main() {
     try {
       // Primero realiza la lectura de usuario para asi tener el ID de este
       const idUsuario = await getOrCreateUsuarioAsync(row["Nombre del ciente"], row["Número de Identificación"], row["Dirección"], row["Teléfono"], row["Correo Electrónico"]);
+      // Sigue con la de transacion entregandole el ID de usuario para su FK
       const idTransacion  = await getOrCreateMedicoAsync(idUsuario, row);
       await insertFactura(idPaciente, idMedico, row);
 
@@ -44,7 +46,7 @@ main().catch(err => {
   console.error("Fallo general:", err);
 });
 
-// 
+// Insercion del los datos a la tabla usuarios revisando que email e identificacion no sean repetidos para respetar el unique, de repetirse alguno se regresa la id de la repeticion
 function getOrCreateUsuario(nombre, idenficacion, direccion, telefono, email, callback) {
   const emailNorm = email.toString().trim().toLowerCase();
   const idenficacionNorm = idenficacion.trim()
