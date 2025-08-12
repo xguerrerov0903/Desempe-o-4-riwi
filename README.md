@@ -64,6 +64,7 @@ npm run dev
 - http://localhost:3000/total-cliente
 - http://localhost:3000/facturas-pendientes
 - http://localhost:3000/lista-transacciones
+
 Backend need to be online to test it
 
 
