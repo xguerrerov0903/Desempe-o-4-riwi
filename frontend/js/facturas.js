@@ -82,37 +82,17 @@ function setupfacturasTableListener() {
       const inputs = tr.querySelectorAll("input");
       const selects = tr.querySelectorAll("select");
 
-      const nuevoCodigo = inputs[0].value.trim();
-
-      // Traer toda la info
-      const todos = await get(url);
-
-      // Verificar si existe otro paciente con el mismo email
-      const existe =
-        Array.isArray(todos) &&
-        todos.some(
-          (p) =>
-            p.codigo === nuevoCodigo &&
-            p.id_factura.toString() !== id.toString()
-        );
-
-      if (existe) {
-        alert(`El codigo "${nuevoCodigo}" ya está registrado en otra factura.`);
-        return;
-      }
       const existingfactura = await get_id(url, id);
 
       const updatedfactura = {
         // Usa los datos existentes y actualiza lo editado
         ...existingfactura,
-
-        codigo_factura: inputs[0].value,
         plataforma: selects[0] ? selects[0].value : existingfactura.plataforma,
-        periodo: inputs[1].value,
-        monto_facturado: inputs[2].value,
-        monto_pagado: inputs[3].value,
-        id_usuario: inputs[4].value,
-        id_transaccion: inputs[5].value,
+        periodo: inputs[0].value,
+        monto_facturado: inputs[1].value,
+        monto_pagado: inputs[2].value,
+        id_usuario: inputs[3].value,
+        id_transaccion: inputs[4].value,
       };
 
       // Update factura in DB
@@ -130,10 +110,8 @@ async function editFactura(id) {
   const facturaContainer = document.getElementById(id);
   const factura = await get_id(url, id);
   facturaContainer.innerHTML = `
-        <td>${factura.id_factura}</td>
-    <td><input type="text" maxlength="7" minlength="7" required value="${
-      factura.codigo_factura
-    }" /></td>
+<td>${factura.id_factura}</td>
+        <td>${factura.codigo_factura}</td>
     <td>
       <select data-field="plataforma">
         ${selectOpt("Daviplata", factura.plataforma)}
