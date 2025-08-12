@@ -44,7 +44,7 @@ You can find it in the file "pd_ximena_guerrero_lovelace.sql"
 ```bash
 git clone https://github.com/xguerrerov0903/Desempe-o-4-riwi.git
 ```
-**2) Backend**
+**2) Backend and csv export**
 ```bash
 cd backend
 npm install mysql2 fs csv-parser csv-parse express cors dotenv
