@@ -1,4 +1,4 @@
-## 🇬🇧 English
+
 
 Full‑stack app to manage for ExpertSoft (**facturas**)
 Backend: **Node.js + Express + MySQL**. Frontend: **Vite SPA** (HTML + JS).
@@ -86,3 +86,7 @@ Backend need to be online to test it on the browser or Postman
 - **Backend:** Node.js, Express 5, mysql2, dotenv, CORS
 - **Frontend:** Vite, HTML/vanilla JS (simple SPA routing)
 
+### Info
+- Ximena Guerrero Villa
+- Lovelace
+- xguerrerov0903@gmail.com
