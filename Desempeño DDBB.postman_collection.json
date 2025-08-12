@@ -28,7 +28,7 @@
 				{
 					"name": "POST",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": []
 					},
 					"response": []
@@ -36,7 +36,7 @@
 				{
 					"name": "PATCH",
 					"request": {
-						"method": "GET",
+						"method": "PATCH",
 						"header": []
 					},
 					"response": []
@@ -44,7 +44,7 @@
 				{
 					"name": "DELETE",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": []
 					},
 					"response": []
