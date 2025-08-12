@@ -65,7 +65,7 @@ npm run dev
 - http://localhost:3000/facturas-pendientes
 - http://localhost:3000/lista-transacciones
 
-Backend need to be online to test it
+Backend need to be online to test it on the browser or Postman
 
 
 ### 🛠️ Tech stack
