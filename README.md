@@ -1,6 +1,6 @@
 ## 🇬🇧 English
 
-Full‑stack app to manage for ExpertSoft (**facturas**) plus reporting queries.  
+Full‑stack app to manage for ExpertSoft (**facturas**)
 Backend: **Node.js + Express + MySQL**. Frontend: **Vite SPA** (HTML + JS).
 
 ### 🧭 Structure
