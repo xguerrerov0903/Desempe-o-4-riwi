@@ -1,0 +1,48 @@
+<!-- Table of events -->
+<section class="CitaContainer">
+<form id="newCitaForm">
+    <label>
+      Codigo factura:
+      <input type="text" name="codigo_factura" maxlength="7" minlength="7" required />
+    </label>
+
+    <label>
+      Platadforma:
+      <select name="codigo_factura" required>
+        <option value="">Seleccionar...</option>
+        <option value="Daviplata">Daviplata</option>
+        <option value="Nequi">Nequi</option>
+      </select>
+    </label>
+
+    <label>
+      Periodo:
+      <input type="date" name="periodo" required />
+    </label>
+
+    <label>
+      Monto facturado:
+      <input type="number" name="monto_facturado" required />
+    </label>
+
+    <label>
+      Monto pagado:
+      <input type="number" name="monto_pagado" required />
+    </label>
+
+    <label>
+      Id Usuario:
+      <input type="number" name="id_usuario" />
+    </label>
+
+    <label>
+      Id Transaccion:
+      <input type="number" name="id_transaccion" />
+    </label>
+
+
+    <div class="form-actions">
+      <button type="submit">Crear cita</button>
+    </div>
+  </form>
+</section>
