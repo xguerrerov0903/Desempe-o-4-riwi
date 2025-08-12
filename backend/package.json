@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "type": "module",
-  "description": "",
   "dependencies": {
     "cors": "^2.8.5",
     "csv-parse": "^6.1.0",

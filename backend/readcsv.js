@@ -2,6 +2,7 @@ import mysql from 'mysql2';
 import fs from 'fs';
 import csv from 'csv-parser';
 import { parse } from 'csv-parse/sync';
+import 'dotenv/config';
 
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
@@ -25,7 +26,7 @@ async function main() {
 
   for (const row of rows) {
     try {
-      const idUsuario = await getOrCreateUsuarioAsync(row["Nombre del ciente"], row["Número de Identificación"], row["Dirección"], row["Teléfono"], row["Correo Electrónico"]);
+      const idUsuario = await getOrCreateUsuarioAsync(row["Nombre del Cliente"], row["Número de Identificación"], row["Dirección"], row["Teléfono"], row["Correo Electrónico"]);
       const idTransacion  = await getOrCreateTransacionAsync(idUsuario, row["ID de la Transacción"],row["Fecha y Hora de la Transacción"], row["Monto de la Transacción"], row["Estado de la Transacción"], row["Tipo de Transacción"]);
       await insertFactura(idUsuario, idTransacion, row);
 
@@ -40,8 +41,8 @@ async function main() {
 }
 
 main().catch(err => {
-  console.error("Fallo general:", err);
-});
+ console.error("Fallo general:", err);
+ });
 
 
 
@@ -51,7 +52,7 @@ function getOrCreateUsuario(nombre, idenficacion, direccion, telefono, email, ca
 
   connection.query(
     "SELECT id_usuario FROM usuarios WHERE email = ? OR identificacion = ?",
-    [emailNorm], [idenficacionNorm],
+    [emailNorm, idenficacionNorm],
     (err, results) => {
       if (err) return callback(err);
 
@@ -74,7 +75,7 @@ function getOrCreateUsuario(nombre, idenficacion, direccion, telefono, email, ca
 
 function getOrCreateTransacion(idUsuario, codigo_transaccion, fecha, cantidad, estado, tipo, callback) {
   connection.query(
-    "SELECT id_transaccion FROM transacciones WHERE codigo_factura = ?",
+    "SELECT id_transaccion FROM transacciones WHERE codigo_transaccion = ?",
     [codigo_transaccion],
     (err, results) => {
       if (err) return callback(err);
@@ -117,9 +118,9 @@ function getOrCreateTransacionAsync(idUsuario, codigo_transaccion, fecha, cantid
 function insertFactura(idPaciente, idMedico, row) {
   return new Promise((resolve, reject) => {
     connection.query(
-      `INSERT INTO citas
+      `INSERT INTO facturas
         (id_usuario, id_transaccion, plataforma, codigo_factura, periodo, monto_facturado, monto_pagado)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+       VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [
         idPaciente,
         idMedico,

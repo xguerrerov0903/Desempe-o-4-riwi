@@ -24,7 +24,7 @@ export async function createFactura(req, res) {
   );
 
   const [rows] = await connection.execute(
-    'SELECT * FROM citas WHERE id_factura = ?',
+    'SELECT * FROM facturas WHERE id_factura = ?',
     [r.insertId]
   );
   res.status(201).json(rows[0]);

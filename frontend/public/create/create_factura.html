@@ -1,5 +1,8 @@
 <!-- Table of events -->
 <section class="CitaContainer">
+     <header>
+      <a href="/facturas" data-link class="active" id="buttonEdit">Volver</a>
+  </header>
 <form id="newCitaForm">
     <label>
       Codigo factura:
@@ -7,8 +10,8 @@
     </label>
 
     <label>
-      Platadforma:
-      <select name="codigo_factura" required>
+      Plataforma:
+      <select name="plataforma" required>
         <option value="">Seleccionar...</option>
         <option value="Daviplata">Daviplata</option>
         <option value="Nequi">Nequi</option>
@@ -17,7 +20,7 @@
 
     <label>
       Periodo:
-      <input type="date" name="periodo" required />
+      <input type="text" name="periodo" required />
     </label>
 
     <label>
@@ -42,7 +45,7 @@
 
 
     <div class="form-actions">
-      <button type="submit">Crear cita</button>
+      <button type="submit">Crear factura</button>
     </div>
   </form>
 </section>
