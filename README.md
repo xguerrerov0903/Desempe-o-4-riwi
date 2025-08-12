@@ -83,18 +83,6 @@ Backend need to be online to test it on the browser or Postman
 - Patch with id
 ```bash
 {
-    "codigo_factura": "FAC5759",
-    "plataforma": "Daviplata",
-    "periodo": "2024-06",
-    "monto_facturado": 69026,
-    "monto_pagado": 68526,
-    "id_usuario": 65,
-    "id_transaccion": 34
-}
-```
-- with id
-```bash
-{
     "codigo_factura": "FAC5345",
     "plataforma": "Daviplata",
     "periodo": "2024-06",
